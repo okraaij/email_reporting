@@ -173,7 +173,7 @@ if open_upflags is not "No current up flags available" and open_downflags is "No
     
     msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
-    fp = open('openupflags.jpg', 'rb')
+    fp = open('ouf.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
     fp.close()
     # Define the image's ID as referenced above
@@ -184,7 +184,7 @@ if open_upflags is "No current up flags available" and open_downflags is not "No
     
     msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
-    fp = open('opendownflags.jpg', 'rb')
+    fp = open('odf.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
     fp.close()
     # Define the image's ID as referenced above

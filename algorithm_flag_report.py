@@ -1,4 +1,7 @@
-# Import packages
+###################
+# Import packages #
+###################
+
 import json, requests, os, smtplib
 import pandas as pd
 import numpy as np
@@ -29,6 +32,8 @@ params = (
     ('Email', 'XXX'),    
     ('Segment', False)
 )
+
+# Access API
 
 response = requests.get("https://analytics.algodynamix.com/v1/pi/GetRealTimeStatus", verify = False, params=params, auth=('XXX', 'XXX'))
 upflags = []
@@ -65,6 +70,8 @@ params = (
     ('Email', 'XXX'),    
     ('Segment', False)
 )
+
+# Access API
 
 response = requests.get("https://analytics.algodynamix.com/v1/pi/GetRealTimeStatus", verify = False, params=params, auth=('XXX', 'XXX'))
 downflags = []
@@ -131,11 +138,11 @@ if open_downflags is not "No current down flags available":
 #  Compose email  #
 ###################
 
-receiver_email = ['olivier.kraaijeveld@kempen.com']
+receiver_email = ['example@example.com']
 
 msgRoot = MIMEMultipart('related')
-msgRoot['Subject'] = 'AlgoDynamix flag overzicht'
-msgRoot['From'] = 'Olivier Kraaijeveld' 
+msgRoot['Subject'] = 'Overview'
+msgRoot['From'] = 'XXX' 
 msgRoot['To'] = ", ".join(receiver_email)
 
 msgAlternative = MIMEMultipart('alternative')
@@ -146,16 +153,16 @@ msgAlternative.attach(msgText)
 
 if open_upflags is not "No current up flags available" and open_downflags is not "No current down flags available":
     
-    msgText = MIMEText('<h2>AlgoDynamix flag overzicht</h2><h3>Open upflags  <p><img src="cid:image1"></a>    <br>  </p></h3><h3>Open downflags</h3><p>  <img src="cid:image2"></a>  <br></p>*Note that <i>Last Price</i> data can be delayed<p><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">Olivier Kraaijeveld</span><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;">    <br>  </span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;">SECURITIES&nbsp;</span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">JUNIOR TRADER</span>  <br>  <br><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">M +31 6 38 146 946 &nbsp; T +31 20 348 82 02 &nbsp; E     <a href="mailto:olivier.kraaijeveld@kempen.com">olivier.kraaijeveld@kempen.com</a>&nbsp; &nbsp; &nbsp;  </span></p><p><span style="font-size: 6.0pt; text-transform: uppercase; letter-spacing: .5pt;">Kempen &nbsp;N.V. &nbsp;Beethovenstraat 300 &nbsp; 1077 WZ Amsterdam     <br>Chamber of Commerce Amsterdam: 34186722   </span><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">THIS IS AN AUTOMATED MESSAGE    <br>  </span></p>', 'html')
+    msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
-    fp = open('openupflags.jpg', 'rb')
+    fp = open('ouf.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
     fp.close()
     # Define the image's ID as referenced above
     msgImage.add_header('Content-ID', '<image1>')
     msgRoot.attach(msgImage)
 
-    fp = open('opendownflags.jpg', 'rb')
+    fp = open('odf.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
     fp.close()
     # Define the image's ID as referenced above
@@ -164,7 +171,7 @@ if open_upflags is not "No current up flags available" and open_downflags is not
     
 if open_upflags is not "No current up flags available" and open_downflags is "No current down flags available":
     
-    msgText = MIMEText('<h2>AlgoDynamix flag overzicht</h2><h3>Open upflags  <p><img src="cid:image1">    <br>  </p></h3><h3>Open downflags</h3><p>None  <br></p>*Note that <i>Last Price</i> data can be delayed<p><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">Olivier Kraaijeveld</span><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;">    <br>  </span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;">SECURITIES&nbsp;</span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">JUNIOR TRADER</span>  <br>  <br><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">M +31 6 38 146 946 &nbsp; T +31 20 348 82 02 &nbsp; E     <a href="mailto:olivier.kraaijeveld@kempen.com">olivier.kraaijeveld@kempen.com</a>&nbsp; &nbsp; &nbsp;  </span></p><p><span style="font-size: 6.0pt; text-transform: uppercase; letter-spacing: .5pt;">Kempen &nbsp;N.V. &nbsp;Beethovenstraat 300 &nbsp; 1077 WZ Amsterdam     <br>Chamber of Commerce Amsterdam: 34186722   </span><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">THIS IS AN AUTOMATED MESSAGE    <br>  </span></p>', 'html')
+    msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
     fp = open('openupflags.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
@@ -175,7 +182,7 @@ if open_upflags is not "No current up flags available" and open_downflags is "No
     
 if open_upflags is "No current up flags available" and open_downflags is not "No current down flags available":
     
-    msgText = MIMEText('<h2>AlgoDynamix flag overzicht</h2><h3>Open upflags  <p></h3>None    <br>  </p><h3>Open downflags</h3><p>  <img src="cid:image1"></a>  <br></p>*Note that <i>Last Price</i> data can be delayed<p><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">Olivier Kraaijeveld</span><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;">    <br>  </span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;">SECURITIES&nbsp;</span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">JUNIOR TRADER</span>  <br>  <br><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">M +31 6 38 146 946 &nbsp; T +31 20 348 82 02 &nbsp; E     <a href="mailto:olivier.kraaijeveld@kempen.com">olivier.kraaijeveld@kempen.com</a>&nbsp; &nbsp; &nbsp;  </span></p><p><span style="font-size: 6.0pt; text-transform: uppercase; letter-spacing: .5pt;">Kempen &nbsp;N.V. &nbsp;Beethovenstraat 300 &nbsp; 1077 WZ Amsterdam     <br>Chamber of Commerce Amsterdam: 34186722   </span><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">THIS IS AN AUTOMATED MESSAGE    <br>  </span></p>', 'html')
+    msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
     fp = open('opendownflags.jpg', 'rb')
     msgImage = MIMEImage(fp.read())
@@ -186,10 +193,10 @@ if open_upflags is "No current up flags available" and open_downflags is not "No
 
 if open_upflags is "No current up flags available" and open_downflags is "No current down flags available":
     
-    msgText = MIMEText('<h2>AlgoDynamix flag overzicht</h2><h3>Open upflags  <p></h3>None    <br>  </p><h3>Open downflags</h3><p>None  <br></p>*Note that <i>Last Price</i> data can be delayed<p><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">Olivier Kraaijeveld</span><span style="font-size:16px;font-family:&quot;Arial&quot;,sans-serif;">    <br>  </span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;">SECURITIES&nbsp;</span><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">JUNIOR TRADER</span>  <br>  <br><span style="font-size:11px;font-family:&quot;Arial&quot;,sans-serif;color:#3257A4;">M +31 6 38 146 946 &nbsp; T +31 20 348 82 02 &nbsp; E     <a href="mailto:olivier.kraaijeveld@kempen.com">olivier.kraaijeveld@kempen.com</a>&nbsp; &nbsp; &nbsp;  </span></p><p><span style="font-size: 6.0pt; text-transform: uppercase; letter-spacing: .5pt;">Kempen &nbsp;N.V. &nbsp;Beethovenstraat 300 &nbsp; 1077 WZ Amsterdam     <br>Chamber of Commerce Amsterdam: 34186722   </span><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p><span style="font-size: 7.0pt; text-transform: uppercase; letter-spacing: .5pt;">THIS IS AN AUTOMATED MESSAGE    <br>  </span></p>', 'html')
+    msgText = MIMEText('INSERT HTML CODE', 'html')
     msgAlternative.attach(msgText)
     
-server = smtplib.SMTP('smtp.vlkintern.nl', 25)
-server.connect("smtp.vlkintern.nl", 25)
-server.sendmail('olivier.kraaijeveld@kempen.com' , 'olivier.kraaijeveld@kempen.com' , msgRoot.as_string())
+server = smtplib.SMTP('smtp@server.com', 25)
+server.connect("smtp@server.com", 25)
+server.sendmail('sender@example.com' , 'receiver@example.com' , msgRoot.as_string())
 server.quit()

@@ -59,6 +59,8 @@ upflags['Instrument'] = upflags['Instrument'].map({'AEX': 'AEX', 'FESX': 'EURO S
 try:
     open_upflags = upflags.loc[upflags['Type'] == 'Up']
 except:
+    pass
+if len(open_upflags) == 0:
     open_upflags = "No current up flags available"
     
 ####################
@@ -97,6 +99,8 @@ downflags['Instrument'] = downflags['Instrument'].map({'AEX': 'AEX', 'FESX': 'EU
 try:
     open_downflags = downflags.loc[downflags['Type'] == 'Down']
 except:
+    pass
+if len(open_downflags) == 0:
     open_downflags = "No current down flags available"
 
 ##################################################### 

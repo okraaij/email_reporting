@@ -197,5 +197,5 @@ if open_upflags is "No current up flags available" and open_downflags is "No cur
     
 server = smtplib.SMTP('smtp@server.com', 25)
 server.connect("smtp@server.com", 25)
-server.sendmail('sender@example.com' , 'receiver@example.com' , msgRoot.as_string())
+server.sendmail('sender@example.com' , receiver_email, msgRoot.as_string())
 server.quit()

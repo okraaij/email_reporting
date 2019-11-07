@@ -62,7 +62,8 @@ except:
     pass
 if len(open_upflags) == 0:
     open_upflags = "No current up flags available"
-    
+
+
 ####################
 # Obtain downflags #
 ####################
@@ -203,3 +204,5 @@ server = smtplib.SMTP('smtp@server.com', 25)
 server.connect("smtp@server.com", 25)
 server.sendmail('sender@example.com' , receiver_email, msgRoot.as_string())
 server.quit()
+
+
